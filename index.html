@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Healthy & Happy | Welcome</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="login-body">
+
+  <div class="auth-container">
+
+    <!-- 🩷 Sign Up Card -->
+    <div class="card" id="signup-card">
+      <h1 class="app-title">Healthy & Happy 🩷</h1>
+      <h3>Create an Account</h3>
+
+      <form id="signup-form">
+        <input type="text" id="firstName" placeholder="First Name" required />
+        <input type="text" id="lastName" placeholder="Last Name" required />
+        <input type="date" id="dob" required />
+        <select id="gender" required>
+          <option value="" disabled selected>Gender</option>
+          <option>Female</option>
+          <option>Male</option>
+        </select>
+        <input type="email" id="email" placeholder="Email Address" required />
+
+        <button type="submit" class="btn-primary">Sign Up</button>
+      </form>
+
+      <p class="alt-text">
+        Already have an account?
+        <a href="#" id="show-login">Login with your ID</a>
+      </p>
+    </div>
+
+    <!-- 🌷 Login Card -->
+    <div class="card hidden" id="login-card">
+      <h1 class="app-title">Healthy & Happy 🩷</h1>
+      <h3>Welcome Back!</h3>
+
+      <form id="login-form">
+        <input type="text" id="login-id" placeholder="Enter Your User ID (e.g., #1234A)" required />
+        <button type="submit" class="btn-primary">Login</button>
+      </form>
+
+      <p class="alt-text">
+        New here?
+        <a href="#" id="show-signup">Create an account</a>
+      </p>
+    </div>
+
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
