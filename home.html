@@ -1,1 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Home | Luna App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg1:#ffe6f0; --bg2:#fff5f9; --card:#fffafa;
+      --accent:#ff8fb3; --accent-2:#ffb6c9; --text:#2d2d2d; --muted:#666;
+      --border:#ffe3ed; --chip:#ffe6ef; --ring:#ffd6e5;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text); background:linear-gradient(135deg,var(--bg1),var(--bg2));
+      min-height:100vh; padding:16px 16px 96px; /* space for bottom nav */
+      display:flex; justify-content:center; align-items:flex-start;
+    }
+    .wrap{width:100%; max-width:1000px}
+    header{
+      display:flex; justify-content:space-between; align-items:center; gap:12px;
+      margin-bottom:16px;
+    }
+    .brand{
+      background:linear-gradient(90deg,#ff9dbd,#ffc1d6); color:#fff; padding:14px 18px;
+      border-radius:14px; font-weight:800; letter-spacing:.3px; box-shadow:0 6px 20px rgba(255,150,180,.35);
+    }
+    .user-pill{
+      background:var(--card); border:1px solid var(--border); border-radius:14px; padding:10px 14px; color:#444; font-weight:600;
+    }
+
+    .grid{
+      display:grid; grid-template-columns:repeat(12,1fr); gap:16px;
+    }
+    .card{
+      grid-column:span 12;
+      background:var(--card); border:1px solid var(--border); border-radius:16px;
+      box-shadow:0 8px 24px rgba(255,150,180,.25);
+      padding:18px;
+    }
+    @media (min-width:880px){
+      .lg-6{grid-column:span 6}
+      .lg-4{grid-column:span 4}
+      .lg-8{grid-column:span 8}
+      .lg-12{grid-column:span 12}
+    }
+
+    h2{margin:0 0 10px; font-size:1.2rem}
+    p{margin:6px 0; color:var(--muted)}
+    .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+
+    select, input[type="number"], input[type="text"]{
+      border:1px solid var(--ring); background:#fff; border-radius:10px; padding:10px 12px; font-size:1rem; min-width:180px;
+    }
+    button{
+      border:none; background:var(--accent); color:#fff; padding:10px 14px; border-radius:10px; font-weight:700; cursor:pointer;
+    }
+    button.secondary{ background:#f0f0f0; color:#333; border:1px solid #e6e6e6 }
+    button.ghost{ background:transparent; color:#333; border:1px solid var(--ring) }
+
+    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
+    .chip{
+      background:var(--chip); border:1px solid var(--ring); padding:8px 12px; border-radius:999px; font-weight:700; cursor:pointer;
+    }
+    .chip.active{ background:#ffd7e6 }
+
+    .progress{
+      display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;
+    }
+    .dot{
+      width:28px; height:28px; border-radius:50%;
+      display:inline-flex; align-items:center; justify-content:center; font-size:.9rem; font-weight:800;
+      border:1px solid var(--ring); background:#fff; color:#999;
+      cursor:pointer;
+    }
+    .dot.filled{ background:var(--accent-2); color:#fff; border-color:var(--accent-2) }
+
+    .list{margin-top:8px}
+    .list li{margin:6px 0}
+
+    /* bottom nav */
+    .nav-bar{
+      position:fixed; left:12px; right:12px; bottom:12px;
+      background:rgba(255,200,215,.94);
+      backdrop-filter:saturate(140%) blur(8px);
+      display:flex; justify-content:space-around; align-items:center;
+      padding:10px 12px; border-radius:16px; border:1px solid var(--border);
+      box-shadow:0 -6px 22px rgba(255,150,180,.25)
+    }
+    .nav-item{color:#fff; text-decoration:none; font-weight:800; padding:8px 10px; border-radius:12px}
+    .nav-item:hover{background:rgba(255,255,255,.18)}
+    .nav-item.active{background:rgba(255,255,255,.25)}
+
+    .note{font-size:.95rem; color:var(--muted)}
+    .hr{height:1px; background:#ffe3ed; border:0; margin:12px 0}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-weight:600}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">Luna Home</div>
+      <div id="userPill" class="user-pill">Welcome</div>
+    </header>
+
+    <section class="grid">
+      <!-- Goals -->
+      <div class="card lg-6">
+        <h2>Goals 🎯</h2>
+        <p class="note">Pick a simple focus and save it. Luna reflects this in tone and choices.</p>
+        <div class="row">
+          <select id="goalType">
+            <option value="">Choose goal…</option>
+            <option value="lose">Lose weight</option>
+            <option value="maintain">Maintain weight</option>
+            <option value="gain">Gain weight</option>
+          </select>
+          <select id="goalPace">
+            <option value="">Pace (optional)</option>
+            <option value="slow">Slow & steady</option>
+            <option value="moderate">Moderate</option>
+            <option value="fast">Aggressive</option>
+          </select>
+          <button id="saveGoal">Save goal</button>
+          <button id="clearGoal" class="ghost">Clear</button>
+        </div>
+        <p id="goalStatus" class="note"></p>
+      </div>
+
+      <!-- Activity nudges -->
+      <div class="card lg-6">
+        <h2>Activity Nudge 🚶‍♀️</h2>
+        <p id="nudgeText">Need a little idea? Press “Another”.</p>
+        <div class="row">
+          <button id="anotherNudge" class="secondary">Another</button>
+          <button id="saveNudge" class="ghost">Save as today’s</button>
+        </div>
+        <p id="nudgeSaved" class="note"></p>
+        <hr class="hr" />
+        <p class="note">Tip: even 10 minutes helps. Steward the body God gave you. 💗</p>
+      </div>
+
+      <!-- Water tracker -->
+      <div class="card lg-8">
+        <h2>Water Tracker 💧</h2>
+        <p class="note">Aim for 8 cups today.</p>
+        <div id="waterDots" class="progress"></div>
+        <div class="row" style="margin-top:10px">
+          <button id="addCup">+1 cup</button>
+          <button id="resetWater" class="ghost">Reset</button>
+        </div>
+        <p id="waterStatus" class="note"></p>
+      </div>
+
+      <!-- Streaks -->
+      <div class="card lg-4">
+        <h2>Streak 🔥</h2>
+        <p>Consecutive check-in days</p>
+        <div style="font-size:2.4rem; font-weight:800" id="streakCount">0</div>
+        <p id="streakNote" class="note"></p>
+        <div class="row">
+          <button id="celebrate" class="secondary">Celebrate</button>
+          <button id="resetStreak" class="ghost">Reset</button>
+        </div>
+      </div>
+
+      <!-- Print plan -->
+      <div class="card lg-12">
+        <h2>Meal Plan 🗒️</h2>
+        <p class="note">Print or view your plan saved from Luna. If none exists, generate one in the Luna page.</p>
+        <div class="row" style="margin-bottom:10px">
+          <button id="previewPlan" class="secondary">Preview</button>
+          <button id="printPlan">Print</button>
+          <a href="chatbot.html" class="nav-item" style="background:#ffe0ea; color:#333; text-decoration:none">Open Luna</a>
+        </div>
+        <div id="planPreview"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- bottom nav -->
+  <nav class="nav-bar">
+    <a class="nav-item active" href="home.html">Home</a>
+    <a class="nav-item" href="chatbot.html">Luna</a>
+    <a class="nav-item" href="account.html">Account</a>
+  </nav>
+
+  <script>
+    // UTIL
+    const $ = sel => document.querySelector(sel);
+    const todayKey = () => new Date().toISOString().slice(0,10); // YYYY-MM-DD
+
+    // USER PILL
+    (function initUser(){
+      const u = JSON.parse(localStorage.getItem('user') || '{}');
+      // migrate id -> userId if needed
+      if(u && !u.userId && u.id){ u.userId = u.id; localStorage.setItem('user', JSON.stringify(u)); }
+      if(!u || !u.userId){
+        // not logged in
+        $('#userPill').textContent = 'Welcome — please sign in';
+      }else{
+        const name = u.firstName ? `${u.firstName}` : 'Friend';
+        $('#userPill').innerHTML = `${name} · <span class="mono">${u.userId}</span>`;
+      }
+    })();
+
+    // GOALS
+    const goalKey = 'goal';
+    function loadGoal(){
+      const g = JSON.parse(localStorage.getItem(goalKey) || 'null');
+      if(g){
+        $('#goalType').value = g.type || '';
+        $('#goalPace').value = g.pace || '';
+        $('#goalStatus').textContent = `Saved: ${g.type || '-'} ${g.pace ? '· '+g.pace : ''}`;
+      }else{
+        $('#goalStatus').textContent = 'No goal saved yet.';
+      }
+    }
+    $('#saveGoal').addEventListener('click', ()=>{
+      const type = $('#goalType').value;
+      const pace = $('#goalPace').value;
+      localStorage.setItem(goalKey, JSON.stringify({type, pace, savedAt: Date.now()}));
+      loadGoal();
+    });
+    $('#clearGoal').addEventListener('click', ()=>{
+      localStorage.removeItem(goalKey);
+      loadGoal();
+    });
+
+    // NUDGES
+    const nudgeList = [
+      'Take a 10-minute walk after your next meal.',
+      'Stretch your neck/shoulders for 3 minutes.',
+      'Add 1 set of 10 air squats today.',
+      'Slow breathing: 5 deep breaths before bed.',
+      'Stand up and move for 2 minutes every hour.',
+      'Park a little farther and enjoy a short walk.',
+      'Short plank: 20 seconds, once today.',
+      'Gentle 5-minute worship walk & pray.'
+    ];
+    const nudgeKey = 'nudgeToday';
+    function randomNudge(){
+      return nudgeList[Math.floor(Math.random()*nudgeList.length)];
+    }
+    function loadNudge(){
+      const saved = JSON.parse(localStorage.getItem(nudgeKey) || 'null');
+      if(saved && saved.date === todayKey()){
+        $('#nudgeText').textContent = saved.text;
+        $('#nudgeSaved').textContent = 'Saved for today.';
+      }else{
+        const text = randomNudge();
+        $('#nudgeText').textContent = text;
+        $('#nudgeSaved').textContent = '';
+      }
+    }
+    $('#anotherNudge').addEventListener('click', ()=>{
+      $('#nudgeText').textContent = randomNudge();
+      $('#nudgeSaved').textContent = '';
+    });
+    $('#saveNudge').addEventListener('click', ()=>{
+      localStorage.setItem(nudgeKey, JSON.stringify({date: todayKey(), text: $('#nudgeText').textContent}));
+      $('#nudgeSaved').textContent = 'Saved for today.';
+    });
+
+    // WATER
+    const waterKey = 'water';
+    const DAILY_TARGET = 8;
+    function loadWater(){
+      const saved = JSON.parse(localStorage.getItem(waterKey) || 'null');
+      let count = 0;
+      if(saved && saved.date === todayKey()) count = saved.count;
+      renderWater(count);
+    }
+    function renderWater(count){
+      const wrap = $('#waterDots');
+      wrap.innerHTML = '';
+      for(let i=1;i<=DAILY_TARGET;i++){
+        const d = document.createElement('button');
+        d.className = 'dot' + (i<=count ? ' filled' : '');
+        d.textContent = i;
+        d.title = `Set to ${i}`;
+        d.onclick = ()=> saveWater(i);
+        wrap.appendChild(d);
+      }
+      $('#waterStatus').textContent = `${count}/${DAILY_TARGET} cups today`;
+    }
+    function saveWater(count){
+      localStorage.setItem(waterKey, JSON.stringify({date: todayKey(), count}));
+      renderWater(count);
+    }
+    $('#addCup').addEventListener('click', ()=>{
+      const saved = JSON.parse(localStorage.getItem(waterKey) || 'null');
+      const prev = (saved && saved.date === todayKey()) ? saved.count : 0;
+      const next = Math.min(DAILY_TARGET, prev+1);
+      saveWater(next);
+    });
+    $('#resetWater').addEventListener('click', ()=> saveWater(0));
+
+    // STREAKS
+    const streakKey = 'streak';
+    function loadStreak(){
+      const s = JSON.parse(localStorage.getItem(streakKey) || 'null');
+      const today = new Date(todayKey());
+      if(!s){
+        localStorage.setItem(streakKey, JSON.stringify({count:1, last: todayKey()}));
+        $('#streakCount').textContent = 1;
+        $('#streakNote').textContent = 'Day 1 — great start!';
+        return;
+      }
+      const last = new Date(s.last);
+      const diff = Math.floor((today - last) / (1000*60*60*24));
+      let count = s.count;
+      if(diff === 1){ count = s.count + 1; }
+      else if(diff > 1){ count = 1; } // reset if a gap
+      localStorage.setItem(streakKey, JSON.stringify({count, last: todayKey()}));
+      $('#streakCount').textContent = count;
+      $('#streakNote').textContent = diff > 1 ? 'Back at it — you’ve restarted your streak!' : 'Keep going — one faithful day at a time.';
+    }
+    $('#celebrate').addEventListener('click', ()=>{
+      const c = $('#streakCount').textContent;
+      alert(`Nice! ${c} days in a row. Keep shining!`);
+    });
+    $('#resetStreak').addEventListener('click', ()=>{
+      localStorage.setItem(streakKey, JSON.stringify({count:1, last: todayKey()}));
+      loadStreak();
+    });
+
+    // PLAN PREVIEW & PRINT
+    function getPlan(){
+      return JSON.parse(localStorage.getItem('mealPlan') || 'null');
+    }
+    function renderPlan(target){
+      const plan = getPlan();
+      target.innerHTML = '';
+      if(!plan){
+        target.innerHTML = `<p>No saved plan yet. Open Luna to create one.</p>`;
+        return;
+      }
+      const wrap = document.createElement('div');
+      wrap.style.border = '1px solid var(--border)';
+      wrap.style.borderRadius = '12px';
+      wrap.style.padding = '12px';
+      const title = document.createElement('h3');
+      title.textContent = 'Today’s Plan';
+      title.style.marginTop = '0';
+      wrap.appendChild(title);
+      const ul = document.createElement('ul');
+      ul.className = 'list';
+      for(const [meal, rec] of Object.entries(plan)){
+        const li = document.createElement('li');
+        const name = Array.isArray(rec) ? rec[0] : String(rec);
+        li.innerHTML = `<strong>${meal.toUpperCase()}</strong>: ${name}`;
+        ul.appendChild(li);
+      }
+      wrap.appendChild(ul);
+      target.appendChild(wrap);
+    }
+    $('#previewPlan').addEventListener('click', ()=> renderPlan($('#planPreview')));
+    $('#printPlan').addEventListener('click', ()=>{
+      const plan = getPlan();
+      if(!plan){ alert('No saved plan to print. Open Luna to create one.'); return; }
+      // Build a simple printable window
+      const w = window.open('', 'PRINT', 'height=650,width=900');
+      const u = JSON.parse(localStorage.getItem('user') || '{}');
+      const id = u && (u.userId || u.id) ? (u.userId || u.id) : '';
+      w.document.write(`
+        <html><head><title>Meal Plan</title>
+        <style>
+          body{font-family:Inter,Arial,sans-serif; padding:24px}
+          h1{margin:0 0 8px}
+          .note{color:#666}
+          ul{line-height:1.7}
+        </style>
+        </head><body>
+        <h1>Meal Plan</h1>
+        <div class="note">${u.firstName ? u.firstName : 'User'} ${u.lastName ? u.lastName : ''} ${id ? '· '+id : ''}</div>
+        <hr />
+        <ul>
+          ${Object.entries(plan).map(([meal, rec])=>{
+            const name = Array.isArray(rec) ? rec[0] : String(rec);
+            return `<li><strong>${meal.toUpperCase()}</strong>: ${name}</li>`;
+          }).join('')}
+        </ul>
+        <hr />
+        <div class="note">“I can do all things through Christ who strengthens me.” — Philippians 4:13</div>
+        </body></html>
+      `);
+      w.document.close();
+      w.focus();
+      w.print();
+      w.close();
+    });
+
+    // INIT
+    loadGoal();
+    loadNudge();
+    loadWater();
+    loadStreak();
+    // auto-show a quick plan preview if present
+    renderPlan($('#planPreview'));
+  </script>
+</body>
+</html>
 
