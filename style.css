@@ -1,0 +1,78 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #ffe6f0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #444;
+}
+
+.auth-container {
+  width: 90%;
+  max-width: 400px;
+}
+
+.card {
+  background-color: #fffafa;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(255, 182, 193, 0.4);
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+.hidden {
+  display: none;
+}
+
+.app-title {
+  color: #ff85a1;
+  margin-bottom: 0.5rem;
+}
+
+input, select {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ffb6c1;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  width: 100%;
+  background-color: #ff85a1;
+  color: #fff;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.btn-primary:hover {
+  background-color: #ff5c8d;
+}
+
+.alt-text {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.alt-text a {
+  color: #ff5c8d;
+  text-decoration: none;
+}
+
+.alt-text a:hover {
+  text-decoration: underline;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
