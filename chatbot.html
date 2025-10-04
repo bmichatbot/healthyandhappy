@@ -2,163 +2,70 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Luna | Wellness Chat</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Nunito:wght@600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
     :root{
-      --bg1:#ffe6f0;
-      --bg2:#fff5f9;
-      --card:#fffafa;
-      --accent:#ff8fb3;
-      --accent-2:#ffb6c9;
-      --text:#333;
-      --muted:#666;
-      --ring:#ffd6e5;
+      --bg1:#ffe6f0; --bg2:#fff5f9; --card:#fffafa;
+      --accent:#ff8fb3; --accent-2:#ffb6c9; --text:#2d2d2d; --muted:#666; --ring:#ffd6e5;
     }
     *{box-sizing:border-box}
     body{
-      margin:0;
-      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--text);
+      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif; color:var(--text);
       background:linear-gradient(135deg,var(--bg1),var(--bg2));
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:16px 16px 86px; /* room for bottom nav */
+      min-height:100vh; display:flex; align-items:center; justify-content:center; padding:16px 16px 88px;
     }
     .chat-container{
-      width:100%;
-      max-width:720px;                 /* bigger */
-      height:90vh;                      /* taller */
-      max-height:900px;
-      background:var(--card);
-      border-radius:20px;
-      box-shadow:0 10px 30px rgba(255, 150, 180, .35);
-      display:flex;
-      flex-direction:column;
-      overflow:hidden;
-      border:1px solid #ffe3ed;
+      width:100%; max-width:820px; height:90vh; max-height:920px; background:var(--card);
+      border-radius:22px; box-shadow:0 10px 30px rgba(255,150,180,.35);
+      display:flex; flex-direction:column; overflow:hidden; border:1px solid #ffe3ed;
     }
     .chat-header{
-      background:linear-gradient(90deg,#ff9dbd,#ffc1d6);
-      color:#fff;
-      padding:16px 20px;
-      font-weight:700;
-      letter-spacing:.3px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
+      background:linear-gradient(90deg,#ff9dbd,#ffc1d6); color:#fff; padding:16px 20px;
+      display:flex; align-items:center; justify-content:space-between;
     }
-    .chat-header .brand{font-family:Nunito, Inter, sans-serif; font-size:1.2rem}
-    .chat-header small{opacity:.9; font-weight:500}
-
-    .chat-box{
-      flex:1;
-      overflow-y:auto;
-      padding:18px;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-      scroll-behavior:smooth;
-    }
-    .message{
-      max-width:85%;
-      padding:12px 14px;
-      border-radius:16px;
-      line-height:1.5;
-      font-size:1rem;
-    }
-    .luna{
-      align-self:flex-start;
-      background:#ffd6e5;
-      color:#222;
-      border:1px solid #ffe3ed;
-    }
-    .user{
-      align-self:flex-end;
-      background:#fbeaf1;
-      border:1px solid #ffe3ed;
-    }
-    .chat-input{
-      display:flex;
-      gap:10px;
-      padding:12px;
-      border-top:1px solid #ffe3ed;
-      background:#fff0f7;
-    }
-    .chat-input input{
-      flex:1;
-      border:1px solid #ffd6e5;
-      border-radius:22px;
-      padding:12px 14px;
-      font-size:1rem;
-      outline:none;
-    }
-    .chat-input button{
-      border:none;
-      background:var(--accent);
-      color:#fff;
-      padding:12px 16px;
-      border-radius:22px;
-      font-weight:600;
-      cursor:pointer;
-      transition:.2s transform ease, .2s opacity ease;
-    }
-    .chat-input button:hover{transform:translateY(-1px); opacity:.95}
-
-    .choice-row{
-      display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;
-    }
-    .chip{
-      border:none; background:#ffe6ef; color:#333; padding:8px 12px; border-radius:20px; cursor:pointer;
-      border:1px solid #ffd6e5; font-weight:600; font-size:.95rem;
-    }
+    .chat-header .brand{font-weight:800; letter-spacing:.3px}
+    .chat-header small{opacity:.92; font-weight:600}
+    .chat-box{flex:1; overflow-y:auto; padding:20px; display:flex; flex-direction:column; gap:12px; scroll-behavior:smooth}
+    .message{max-width:85%; padding:12px 14px; border-radius:16px; line-height:1.55; font-size:1rem}
+    .luna{align-self:flex-start; background:#ffdce9; border:1px solid #ffe6ef}
+    .user{align-self:flex-end; background:#f9eaf1; border:1px solid #ffe6ef}
+    .chat-input{display:flex; gap:10px; padding:12px; border-top:1px solid #ffe3ed; background:#fff0f7}
+    .chat-input input{flex:1; border:1px solid #ffd6e5; border-radius:22px; padding:12px 14px; font-size:1rem; outline:none}
+    .chat-input button{border:none; background:var(--accent); color:#fff; padding:12px 16px; border-radius:22px; font-weight:700; cursor:pointer}
+    .chat-input button:hover{opacity:.95}
+    .choice-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:6px}
+    .chip{border:1px solid #ffd6e5; background:#ffe6ef; padding:8px 12px; border-radius:20px; font-weight:700; cursor:pointer}
     .chip:hover{background:#ffe0ea}
-
-    .recipe-title{
-      font-weight:700; text-decoration:underline dotted; cursor:pointer;
-    }
-    .recipe-steps{
-      display:none; margin-top:8px; padding:10px; background:#fff0f7; border:1px solid #ffe3ed; border-radius:12px; color:#444; font-size:.95rem;
-    }
-
+    .recipe-title{font-weight:800; text-decoration:underline dotted; cursor:pointer}
+    .recipe-steps{display:none; margin-top:8px; padding:10px; background:#fff0f7; border:1px solid #ffe3ed; border-radius:12px; color:#444; font-size:.95rem}
     /* bottom nav */
-    .nav-bar{
-      position:fixed; left:12px; right:12px; bottom:12px;
-      background:rgba(255, 200, 215, .92);
-      backdrop-filter:saturate(140%) blur(8px);
-      display:flex; justify-content:space-around; align-items:center;
-      padding:10px 12px; border-radius:16px;
-      box-shadow:0 -6px 22px rgba(255, 150, 180, .25);
-      border:1px solid #ffd6e5;
-    }
-    .nav-item{
-      color:#fff; text-decoration:none; font-weight:700;
-      padding:8px 10px; border-radius:12px; transition:.2s background ease;
-    }
+    .nav-bar{position:fixed; left:12px; right:12px; bottom:12px; background:rgba(255,200,215,.94); backdrop-filter:saturate(140%) blur(8px);
+      display:flex; justify-content:space-around; align-items:center; padding:10px 12px; border-radius:16px;
+      border:1px solid #ffd6e5; box-shadow:0 -6px 22px rgba(255,150,180,.25)}
+    .nav-item{color:#fff; text-decoration:none; font-weight:800; padding:8px 10px; border-radius:12px}
     .nav-item:hover{background:rgba(255,255,255,.18)}
     .nav-item.active{background:rgba(255,255,255,.25)}
+    .note{color:var(--muted); font-size:.95rem}
   </style>
 </head>
 <body>
-
   <div class="chat-container">
     <div class="chat-header">
       <div class="brand">Luna</div>
-      <small>Wellness chat</small>
+      <small>Gentle wellness • faith & food</small>
     </div>
 
     <div id="chat" class="chat-box"></div>
 
     <div class="chat-input">
-      <input id="input" type="text" placeholder="Type here…" />
+      <input id="input" type="text" placeholder="Type here (try: help)…" />
       <button id="send">Send</button>
     </div>
   </div>
 
-  <!-- shared bottom nav for all pages -->
+  <!-- bottom nav -->
   <nav class="nav-bar">
     <a class="nav-item" href="index.html">Home</a>
     <a class="nav-item active" href="chatbot.html">Luna</a>
@@ -170,16 +77,20 @@
     const input = document.getElementById('input');
     const sendBtn = document.getElementById('send');
 
-    // pull user to greet by name if available
+    // ensure user id compatibility (old 'id' -> 'userId')
+    (function migrateId(){
+      const u = JSON.parse(localStorage.getItem('user')||'null');
+      if(u && !u.userId && u.id){ u.userId = u.id; localStorage.setItem('user', JSON.stringify(u)); }
+    })();
+
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const firstName = user.firstName || 'Friend';
 
-    // state
     let recipes = {};
-    let stage = 'idle';  // 'weight' | 'height' | 'pref' | 'done' | 'ask_new'
+    let stage = 'idle';   // weight | height | pref | ask_prev | done
     let data = { weight:null, height:null, bmi:null, category:null, preference:null, plan:null };
 
-    // ---------- UI helpers ----------
+    // ---------- helpers ----------
     const addMsg = (text, who='luna', isHTML=false) => {
       const m = document.createElement('div');
       m.className = `message ${who}`;
@@ -201,78 +112,82 @@
       const wrap = addMsg('', 'luna', true);
       wrap.appendChild(row);
     };
+    const unknown = () =>
+      addMsg("Sorry, I don't quite understand! I'm only here to help with recipes and simple plans to lose/add/maintain weight.");
 
     // ---------- data ----------
     async function loadRecipes(){
       try{
-        const res = await fetch('recipes.json');   // must be same folder & exact name
+        const res = await fetch('recipes.json');
         recipes = await res.json();
       }catch(e){
-        addMsg("I couldn't load recipes. Please confirm the file is named 'recipes.json' and is in the same folder.", 'luna');
+        addMsg("I couldn't load recipes. Make sure the file is named 'recipes.json' and is in the same folder.");
       }
     }
 
-    // ---------- flow ----------
+    // ---------- start ----------
     async function start(){
       await loadRecipes();
-
       const saved = JSON.parse(localStorage.getItem('mealPlan') || 'null');
-
       if(saved){
         data.plan = saved;
-        addMsg(`Welcome back, ${firstName}. I still have your last meal plan.`);
-        addMsg('Would you like a new plan today?');
+        addMsg(`Welcome back, ${firstName}.`);
+        addMsg("Would you like to see your last meal plan?");
         addChoices(['Yes','No']);
-        stage = 'ask_new';
+        stage = 'ask_prev';
       }else{
         greetFresh();
       }
     }
 
     function greetFresh(){
-      addMsg(`Hi ${firstName}. I can build you a simple day plan and recipe steps.`);
-      addMsg('What is your weight in pounds?');
+      addMsg("Hi " + firstName + ". I’d love to craft a simple day plan for you.");
+      addMsg("What is your weight in pounds?");
       stage = 'weight';
     }
 
+    // ---------- input routing ----------
     function handleSend(){
       const txt = (input.value || '').trim();
       if(!txt) return;
       addMsg(txt, 'user');
       input.value = '';
 
+      // simple commands to make it less boring
+      if(/^help$/i.test(txt)) return showHelp();
+      if(/^verse$/i.test(txt)) return shareVerse();
+      if(/^clear plan$/i.test(txt)) return clearPlan();
+      if(/^save plan$/i.test(txt)) return savePlan();
+
       switch(stage){
-        case 'weight': handleWeight(txt); break;
-        case 'height': handleHeight(txt); break;
-        case 'pref':   handlePrefFree(txt); break;
-        case 'ask_new':
-          // If they type instead of clicking chips
-          if(/^\s*yes\s*$/i.test(txt)) return handleChoice('Yes');
-          if(/^\s*no\s*$/i.test(txt))  return handleChoice('No');
+        case 'weight': return handleWeight(txt);
+        case 'height': return handleHeight(txt);
+        case 'pref':   return handlePrefTyped(txt);
+        case 'ask_prev':
+          if(/^yes$/i.test(txt)) return handleChoice('Yes');
+          if(/^no$/i.test(txt))  return handleChoice('No');
           return unknown();
-        default:
-          unknown();
+        default: return unknown();
       }
     }
 
     function handleChoice(label){
-      // normalize
-      if(stage === 'ask_new'){
+      if(stage === 'ask_prev'){
         if(label === 'Yes'){
+          // show previous plan (do NOT generate new)
+          showPlan(data.plan, false);
+          stage = 'done';
+        }else{
+          // build a brand new plan → restart flow
           data = { weight:null, height:null, bmi:null, category:null, preference:null, plan:null };
           greetFresh();
-        }else{
-          showPlan(data.plan, false); // show existing
         }
         return;
       }
       if(stage === 'pref'){
-        // preference chosen via chip
-        if(label === 'Vegetarian' || label === 'High-Protein' || label === 'Low-Carb' || label === 'No Preference'){
-          applyPreference(label);
-        }else{
-          unknown();
-        }
+        const valid = ['Vegetarian','High-Protein','Low-Carb','No Preference'];
+        if(!valid.includes(label)) return unknown();
+        applyPreference(label);
       }
     }
 
@@ -290,26 +205,34 @@
       if(!Number.isFinite(h) || h <= 0) return addMsg('Please enter a valid number for height (in inches).');
       data.height = h;
 
-      // BMI & category
       const bmi = (data.weight / (h*h)) * 703;
       data.bmi = Number(bmi.toFixed(2));
 
-      // categories in your JSON: underweight, normal, overweight (no "obese")
+      // categories expected by your JSON: underweight, normal, overweight
+      // we'll map obese->overweight when filtering recipes
       let cat = 'normal';
       if(bmi < 18.5) cat = 'underweight';
       else if(bmi < 25) cat = 'normal';
       else if(bmi < 30) cat = 'overweight';
-      else cat = 'obese'; // we'll map obese->overweight when filtering
+      else cat = 'obese';
       data.category = cat;
 
-      // gentle feedback
+      // kind + Christian tone; special note if BMI ≥ 40
       let fb = `Your BMI is ${data.bmi}. `;
-      if(cat === 'underweight') fb += 'Let’s focus on nourishing and adding healthy calories.';
-      else if(cat === 'normal') fb += 'Great balance—let’s maintain with smart choices.';
-      else if(cat === 'overweight') fb += 'Small improvements plus regular movement will help.';
-      else fb += 'We’ll take steady steps with mindful meals and activity.';
-
+      if(cat === 'underweight'){
+        fb += "You're wonderfully made. Let's focus on gentle nourishment and steady strength.";
+      }else if(cat === 'normal'){
+        fb += "Great balance—well done! Let's keep caring for your body and soul.";
+      }else if(cat === 'overweight'){
+        fb += "You are loved. A bit more movement and mindful meals will help—one step at a time.";
+      }else{
+        fb += "You matter so much. Small, steady steps make a big difference.";
+        if(data.bmi >= 40){
+          fb += " For your safety, please consider consulting a healthcare professional who can partner with you. I’ll still suggest a simple plan if you’d like.";
+        }
+      }
       addMsg(fb);
+
       askPreference();
     }
 
@@ -319,43 +242,37 @@
       stage = 'pref';
     }
 
-    function handlePrefFree(txt){
-      // let typed values route same as chips
+    function handlePrefTyped(txt){
       const map = {
         'vegetarian':'Vegetarian',
-        'high-protein':'High-Protein',
-        'high protein':'High-Protein',
-        'low-carb':'Low-Carb',
-        'low carb':'Low-Carb',
-        'no':'No Preference',
-        'none':'No Preference',
-        'no preference':'No Preference'
+        'high-protein':'High-Protein','high protein':'High-Protein',
+        'low-carb':'Low-Carb','low carb':'Low-Carb',
+        'no':'No Preference','none':'No Preference','no preference':'No Preference'
       };
       const key = txt.trim().toLowerCase();
-      if(map[key]) applyPreference(map[key]);
-      else unknown();
+      if(map[key]) applyPreference(map[key]); else unknown();
     }
 
     function applyPreference(label){
-      data.preference = label; // store the display label
+      data.preference = label; // store as display label
       buildPlan();
     }
 
-    // ---------- recipes ----------
+    // ---------- recipes & plan ----------
     function pick(mealType){
       const arr = recipes?.[mealType] || [];
-      const pref = (data.preference || 'No Preference').toLowerCase(); // display label -> normalize
-      // items are [name, steps[], categoryString, tags[]]
-      // map obese->overweight to match your JSON categories
+      const pref = (data.preference || 'No Preference').toLowerCase();
       const wantCat = (data.category === 'obese') ? 'overweight' : data.category;
 
+      // expected structure from your JSON:
+      // [name, stepsArray, "categoryString", ["tag1","tag2",...]]
       const filtered = arr.filter(([name, steps, cat, tags]) => {
         const catOk = (cat === wantCat) || (data.category === 'obese' && cat === 'overweight');
         if(pref === 'no preference') return catOk;
-        // normalize tags
         const t = (tags || []).map(x => String(x).toLowerCase());
         return catOk && t.includes(pref);
       });
+
       if(!filtered.length) return null;
       return filtered[Math.floor(Math.random()*filtered.length)];
     }
@@ -363,7 +280,7 @@
     function buildPlan(){
       const plan = {};
       ['breakfast','lunch','snacks','dinner'].forEach(meal=>{
-        plan[meal] = pick(meal) || [`Chef’s choice`, [], 'normal', []];
+        plan[meal] = pick(meal) || ['Chef’s choice', [], 'normal', []];
       });
       data.plan = plan;
       localStorage.setItem('mealPlan', JSON.stringify(plan));
@@ -372,7 +289,7 @@
     }
 
     function showPlan(plan, isNew){
-      addMsg(isNew ? 'Here is your plan for today:' : 'Here is your saved plan:');
+      addMsg(isNew ? 'Here is your plan for today:' : 'Here is your last saved plan:');
       for(const [meal, rec] of Object.entries(plan)){
         const [name, steps] = rec;
         const wrap = addMsg(`${meal.toUpperCase()}: `, 'luna', true);
@@ -391,22 +308,45 @@
         });
       }
 
-      // After showing plan on a return visit, offer a fresh one again
+      // small encouragement
+      addMsg("“I can do all things through Christ who strengthens me.” — Philippians 4:13", 'luna');
+
       if(!isNew){
+        // after showing old plan, offer to build new
         addMsg('Would you like a new plan now?');
         addChoices(['Yes','No']);
-        stage = 'ask_new';
+        stage = 'ask_prev';
       }
     }
 
-    // ---------- misc ----------
-    function unknown(){
-      addMsg("Sorry, I don't quite understand! I'm only used to give you recipes and plans to lose/add/maintain weight!");
+    // ---------- simple extras (to keep it lively) ----------
+    function showHelp(){
+      addMsg("You can type: 'help', 'verse', 'save plan', 'clear plan'. Otherwise, follow the prompts for weight, height, and preferences.");
+    }
+    function shareVerse(){
+      const verses = [
+        "Psalm 139:14 — You are fearfully and wonderfully made.",
+        "Jeremiah 29:11 — “For I know the plans I have for you,” declares the Lord.",
+        "2 Corinthians 12:9 — “My grace is sufficient for you.”",
+        "Philippians 4:13 — I can do all things through Christ who strengthens me."
+      ];
+      addMsg(verses[Math.floor(Math.random()*verses.length)]);
+    }
+    function savePlan(){
+      if(!data.plan) return addMsg("No plan yet to save. Let’s create one first.");
+      localStorage.setItem('mealPlan', JSON.stringify(data.plan));
+      addMsg("Saved your current plan.");
+    }
+    function clearPlan(){
+      localStorage.removeItem('mealPlan');
+      addMsg("Cleared your saved plan. Ready to start fresh?");
+      addChoices(['Yes','No']);
+      stage = 'ask_prev';
     }
 
-    // wire events
+    // events
     sendBtn.addEventListener('click', handleSend);
-    input.addEventListener('keydown', (e)=>{ if(e.key==='Enter') handleSend(); });
+    input.addEventListener('keydown', e => { if(e.key==='Enter') handleSend(); });
 
     start();
   </script>
