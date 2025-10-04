@@ -33,7 +33,7 @@ document.getElementById("signup-form").addEventListener("submit", (e) => {
   localStorage.setItem("user", JSON.stringify(newUser));
 
   alert(`Welcome ${newUser.firstName}! Your ID is ${newUser.userId} 💖`);
-  window.location.href = "chatbot.html";
+  window.location.href = "home.html";
 });
 
 // 🌸 Handle Login
