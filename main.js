@@ -45,7 +45,7 @@ document.getElementById("login-form").addEventListener("submit", (e) => {
 
   if (savedUser && savedUser.userId === enteredId) {
     alert(`Welcome back, ${savedUser.firstName}! 💕`);
-    window.location.href = "chatbot.html";
+    window.location.href = "home.html";
   } else {
     alert("Invalid User ID! Please try again or create an account.");
   }
